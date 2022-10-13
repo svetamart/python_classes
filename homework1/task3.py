@@ -9,14 +9,18 @@
 x = float(input('x = '))
 y = float(input('y = '))
 
-if x == 0 or y == 0:
-    print('x и y не должны равняться нулю')
 
 if x > 0 and y > 0:
     print('1')
-if x < 0 and y > 0:
+elif x < 0 and y > 0:
     print('2')
-if x < 0 and y < 0:
+elif x < 0 and y < 0:
     print('3')
-if x > 0 and y < 0:
+elif x > 0 and y < 0:
     print('4')
+elif x == 0 and y != 0:
+    print('Точка находится на оси ординат Y')
+elif y == 0 and x != 0:
+    print('Точка находится на оси абсцисс Х')
+else:
+    print('Точка находится в центре координат')

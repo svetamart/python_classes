@@ -9,6 +9,6 @@ y1 = float(input('Введите координату y первой точки:
 x2 = float(input('Введите координату x второй точки: '))
 y2 = float(input('Введите координату y второй точки: '))
 
-from math import sqrt
-distance = round(sqrt((x2 - x1)**2 + (y2 - y1)**2), 2)
+
+distance = round(((x2 - x1)**2 + (y2 - y1)**2) ** 0.5, 2)
 print(f'Расстояние между точками A ({x1}, {y1}) и B ({x2}, {y2}) равно {distance}')
