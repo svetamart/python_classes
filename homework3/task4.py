@@ -7,8 +7,9 @@
 
 
 n = int(input('Введите число: '))
+temp = int(n)
 result = ''
-while n > 0:
-    result = str(n % 2) + result
-    n = n // 2
-print(result)
+while temp:
+    result = str(temp % 2) + result
+    temp //= 2
+print(f'{n} --> {result}')

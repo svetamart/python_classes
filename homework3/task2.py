@@ -6,11 +6,7 @@
 
 
 list1 = [2, 3, 5, 4, 38, 10, 6]
-if len(list1) % 2 == 0:
-    list2 = [0] * int(len(list1) // 2)
-else:
-    list2 = [0] * (len(list1) // 2 + 1)
-for i in range(len(list2)):
-    list2[i] = list1[i] * list1[len(list1) - i - 1]
-
+list2 = []
+for i in range((len(list1) + 1) // 2):
+    list2.append(list1[i] * list1[len(list1) - i - 1])
 print(list2)
