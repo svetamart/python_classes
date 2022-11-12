@@ -52,7 +52,6 @@ value = [' ' for i in range(9)]
 def tictactoe(value, current_player):
     valid = False
     while not valid:
-        number = int(input(f'Игрок {current_player}, делайте свой ход: '))
         print('''Чтобы сделать ход, введите номер клетки,
 куда хотите поставить свой Х или О.
             1 | 2 | 3
@@ -60,6 +59,7 @@ def tictactoe(value, current_player):
             4 | 5 | 6
             ---------
             7 | 8 | 9''')
+        number = int(input(f'Игрок {current_player}, делайте свой ход: '))
         try:
             number = int(number)
         except:
