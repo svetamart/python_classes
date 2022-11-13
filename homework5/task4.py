@@ -1,40 +1,46 @@
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных. 
 # Входные и выходные данные хранятся в отдельных текстовых файлах.
 
-with open('RLE1.txt', 'r') as file:
-    data = file.read()
+# with open('RLE1.txt', 'r') as file:
+#     data = file.readlines()
 
-def encode(data):
+text = 'WWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW'
+print(f'Исходные данные: {text}')
+
+def encode(text):
     code = ''
-    previous_char = ''
     count = 1
-    for char in data:
-        if char != previous_char:
-            if previous_char:
-                code += str(count) + previous_char
-            count = 1
-            previous_char = char
-        else:
+    for i in range(len(text) - 1):
+        if text[i] == text[i + 1]:
             count += 1
+            if count == 9:
+                code += str(count) + text[i]
+                count = 1
+        elif text[i] != text[i + 1]:
+            code += str(count) + text[i]
+            count = 1
+    if count > 1 or text[len(text) - 2] != text[-1]:
+        code += str(count) + text[-1]
     return code
 
-            
-text1 = encode(data)
-print(text1)
+encoded = encode(text)        
+print(f'Сжатый файл: {encoded}')
 
-with open('RLE2.txt', 'w') as file2:
-    data2 = file2.read()
+with open('RLE2.txt', 'w') as data:
+    data.write(encoded)
 
-def decoding(data2:str):
+with open('RLE2.txt', 'r') as data:
+    new_text_file = data.readlines()
+
+for_decoding = ''.join(new_text_file)
+
+def decoding(for_decoding):
     count = ''
     decode = ''
-    for char in data2:
-        if char.isdigit():
-            count += char 
-        else:
-            decode += char * int(count)
-            count = ''
+    for i in range(0, len(for_decoding), 2):
+        count = for_decoding[i] 
+        decode += for_decoding[i + 1] * int(count)
     return decode
 
-result = decoding(text1)
-print(result)
+result = decoding(for_decoding)
+print(f'Восстановленные данные: {result}')

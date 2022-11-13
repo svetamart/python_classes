@@ -31,6 +31,8 @@ def game(candy, players, count, msg):
         move = int(input())
         if move > candy or move > 28:
             print(f'Многовато конфет вы взяли, {players[count]}. Всего у нас осталось {candy}. Давайте брать не больше 28 за раз?')
+        elif move == 0:
+            print(f'Хмм, что-то тут не так. Вы не взяли ни одной конфеты, {players[count]}! Так не пойдет, давайте-ка еще раз.')
         else:
             candy -= move
             print(f'{players[count]} взял {move} конфет. На столе осталось {candy}.')
