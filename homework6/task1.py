@@ -32,8 +32,10 @@ def parse(expression):
             exp.append(float(num))
     return exp
 
+# ОНО НЕ РАБОТАЕТ НАДО ПЕРЕДЕЛАТЬ
+
 def calculator(exp):
-    for i in exp:
+    for i in range(len(exp)):
         if exp[i] == '/':
             if exp[i + 1] == 0:
                 print('Деление на ноль')
