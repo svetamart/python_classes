@@ -67,9 +67,8 @@ def find_data(file):
         for row in reader:
             if item in row:
                 print(row)
-            else:
-                print('Данные не найдены') # выводит все строчки, а там, где нет нужной инфы, пишет нет данных
-                                            # надо, чтобы выводил только с item
+            if item not in reader:
+                print('Данные не найдены') # изменила, надо тестить
                 
                 
 
@@ -84,3 +83,24 @@ def delete_data(name):
                 print(row)
             print('Данные не найдены')
 
+# и эта не работает
+def delete(name):
+    # изменяет запись в файле
+    # находит запись по id, удаляет строку, перезаписывает файл
+    with open(name, 'r+', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        reader = list(reader)
+        item = input('Введите информацию, которую хотите удалить: ')
+        for i in range(len(reader)):
+            temp = ''.join(reader[i]).split(' ')
+            if temp[i] == item:
+                del reader[i]
+                break
+        f.close()
+        with open(name, 'w+', encoding='utf-8') as f:
+            f.close()
+        with open(name, 'r+', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            for i in reader:
+                writer.writerow(i)
+            f.close()
