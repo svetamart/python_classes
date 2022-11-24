@@ -1,16 +1,22 @@
 import csv
+import pandas
 
 name = input('''Введите имя файла, с которым хотите работать. Не забудьте указать расширение. Пример: students.csv 
 ''')
 
-def view(name):
-    with open(name, encoding='utf-8') as file:
-        reader = csv.reader(file)
-        reader = list(reader)
-        for i in range(len(reader)):
-            array = ' '.join(reader[i]).split(',')
-            for i in array:
-                print(i)
+def view_file(name):
+    data = pandas.read_csv(name)
+    print(data)
+
+
+# def view(name):
+#     with open(name, encoding='utf-8') as file:
+#         reader = csv.reader(file)
+#         reader = list(reader)
+#         for i in range(len(reader)):
+#             array = ' '.join(reader[i]).split(',')
+#             for i in array:
+#                 print(i)
 
 def add_data(name):
     with open(name, 'a', newline='', encoding='utf-8') as file:

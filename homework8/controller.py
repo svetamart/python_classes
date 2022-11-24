@@ -9,8 +9,8 @@ def run():
     while running:
         task = view.operation()
         if task == 1:
-            logger.log(f'{model.view.__name__} для просмотра базы данных')
-            model.view(name)
+            logger.log(f'{model.view_file.__name__} для просмотра базы данных')
+            model.view_file(name)
         elif task == 2:
             logger.log(f'{model.add_data.__name__} для добавления данных')
             model.add_data(name)
