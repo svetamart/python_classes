@@ -2,6 +2,7 @@ import csv
 
 f = ['phone_book.csv']
 
+
 def create_directory():
     data = ['ID', 'Имя', 'Фамилия', 'Дата рождения', 'Место работы', 'Телефон', 'Комментарий']
     name = input("Введите имя файла латинскими буквами и не забудьте указать расширение. Пример: new_phone_book.csv ")
@@ -12,11 +13,13 @@ def create_directory():
         print(f.read())
     return name
 
+
 def import_directory():
     new_file = input('''Введите имя файла, из которого хотите загрузить справочник. 
     Не забудьте указать расширение. Пример: phone_book.csv 
     ''')
     return new_file
+
 
 def add_file(name):
     global f
@@ -24,19 +27,30 @@ def add_file(name):
     files.append(name)
     return files
 
+
 def view_directory(file):
     with open(file, encoding='utf-8') as f: 
         reader = csv.reader(f, delimiter=' ')
         for row in reader:
             print(row)
-    
+
+
+def people_id(file):
+    with open(file, encoding='utf-8') as file:
+        reader = csv.reader(file)
+        reader = list(reader)
+        line = reader[len(reader) - 1]
+        id = line[0]
+    return id
+
 
 def add_data(file):
     answer = 1
     while answer == 1:
         with open(file, 'a', encoding='utf-8') as f: 
             writer = csv.writer(f, lineterminator='\n')
-            data = [input('ID: '), input('Имя: '), input('Фамилия: '), input('Дата рождения: '), 
+            id = people_id(file)
+            data = [id, input('Имя: '), input('Фамилия: '), input('Дата рождения: '), 
             input('Место работы: '), input('Телефон: '), input('Комментарий: ')]
             writer.writerow(data)
             print(f'Вы добавили {data}')
@@ -68,39 +82,34 @@ def find_data(file):
             if item in row:
                 print(row)
             if item not in reader:
-                print('Данные не найдены') # изменила, надо тестить
+                print('Данные не найдены') # изменила, надо тестить 
                 
                 
 
-# эта функция не работает :(
 def delete_data(name):
-    item = input('Введите информацию, которую хотите удалить: ')
-    with open(name, 'w', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        for row in writer:
-            if item in row:
-                item = ''
-                print(row)
-            print('Данные не найдены')
-
-# и эта не работает
-def delete(name):
-    # изменяет запись в файле
-    # находит запись по id, удаляет строку, перезаписывает файл
-    with open(name, 'r+', encoding='utf-8') as f:
-        reader = csv.reader(f)
+    item = input('Введите ID записи, которую хотите удалить: ')
+    with open(name, newline='', encoding='utf-8') as source:
+        reader = csv.reader(source)
         reader = list(reader)
-        item = input('Введите информацию, которую хотите удалить: ')
-        for i in range(len(reader)):
-            temp = ''.join(reader[i]).split(' ')
-            if temp[i] == item:
-                del reader[i]
-                break
-        f.close()
-        with open(name, 'w+', encoding='utf-8') as f:
-            f.close()
-        with open(name, 'r+', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            for i in reader:
-                writer.writerow(i)
-            f.close()
+        with open(name, 'w', newline='', encoding='utf-8') as destination:
+            writer = csv.writer(destination)
+            writer.writerow(reader[0])
+            writer.writerows(filter(lambda row: item not in row, reader[1:]))
+    return name
+
+
+# должна вызываться после удаления информации, чтобы обновить ID
+def change_id(name):
+    with open(name, 'r+', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        reader = list(reader)
+        with open(name, 'w', newline='', encoding='utf-8') as destination:
+            writer = csv.writer(destination)
+            writer.writerow(reader[0])
+            count = 1
+            for line in reader[1:]: 
+                for i in range(1):
+                    line[0] = count
+                    writer.writerow(line)
+                count += 1           
+    return name

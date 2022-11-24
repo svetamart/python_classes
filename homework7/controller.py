@@ -11,22 +11,14 @@ def run():
             create = model.create_directory()
             if create not in files:
                 files.append(create)
-                answer1 = view.create_success()
-                if answer1 == 1:
-                    model.add_data(create)
-                if answer1 == 3:
-                    exit()
+                print('Справочник успешно создан!')
             else:
                 print('Файл с таким именем уже существует.')
         if task == 2:
             uploaded = model.import_directory()
             if uploaded not in files:
                 model.add_file(uploaded)
-                message = view.upload()
-                if message == 1:
-                    model.view_directory(uploaded)
-                if message == 3:
-                    exit()
+                print('Файл успешно загружен!')
             else:
                 print('Кажется, что-то пошло не так :( Возможно, файл с таким названием уже существует.')
         if task == 3:
@@ -39,11 +31,7 @@ def run():
                 Ваш ответ: ''')))
                 if answer2 == 1:
                     model.add_file(file)
-                    message = view.upload()
-                    if message == 1:
-                        model.view_directory(file)
-                    if message == 3:
-                        exit()
+                    print('Файл успешно загружен!')
             model.view_directory(file)
         if task == 4:
             print(f'Доступные файлы: {files}')
@@ -55,11 +43,7 @@ def run():
                 Ваш ответ: ''')))
                 if answer3 == 1:
                     model.add_file(file)
-                    message = view.upload()
-                    if message == 1:
-                        model.view_directory(file)
-                    if message == 3:
-                        exit()
+                    print('Файл успешно загружен!')
             model.view_directory(file)
             model.add_data(file)
         if task == 5:
@@ -72,11 +56,7 @@ def run():
                 Ваш ответ: ''')))
                 if answer4 == 1:
                     model.add_file(file)
-                    message = view.upload()
-                    if message == 1:
-                        model.view_directory(file)
-                    if message == 3:
-                        exit()
+                    print('Файл успешно загружен!')
             model.find_data(file)
         if task == 6:
             print(files)
@@ -90,12 +70,9 @@ def run():
                 Ваш ответ: ''')))
                 if answer5 == 1:
                     model.add_file(file)
-                    message = view.upload()
-                    if message == 1:
-                        model.view_directory(file)
-                    if message == 3:
-                        exit()
+                    print('Файл успешно загружен!')
             model.view_directory(file)
             model.delete_data(file)
+            model.change_id(file)
         if task == 8:
-            exit()
+            running = False
