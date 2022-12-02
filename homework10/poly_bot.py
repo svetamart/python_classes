@@ -1,7 +1,7 @@
 import telebot
 import poly_bot_func
 
-token = '5890280310:AAEu3PpsD3r-HR4zkaA9mTTAmfVSMA9Fiqw'
+token = 'YOUR TOKEN'
 bot = telebot.TeleBot(token)
 
 poly1 = poly_bot_func.poly1
