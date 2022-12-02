@@ -38,7 +38,7 @@ def student_id(name):
 
 
 # сохранили результат во временный файл, основной остался без изменений
-# 
+# ВРЕМЕННЫЙ ФАЙЛ НУЖНО УДАЛИТЬ
 def delete_data(name):
     item = input('Введите ID записи, которую хотите удалить: ')
     with open(name, newline='', encoding='utf-8') as source:
