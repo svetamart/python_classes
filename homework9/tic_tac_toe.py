@@ -20,7 +20,7 @@ buttons = []
 
 player1 = 'X'
 player2 = 'O'
-count = 1
+count = 0
 turns = 0
 
 players = [player1, player2]
